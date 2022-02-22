@@ -46,7 +46,7 @@ module.exports = class extends Command {
         );
       });
       connection.on(VoiceConnectionStatus.Disconnected, () => {
-        message.channel.send("Me has been disconnected. Clearing the queue.");
+        message.channel.send("I have been disconnected. Clearing the queue.");
         queue.setBusy(false);
         queue.clear();
       });

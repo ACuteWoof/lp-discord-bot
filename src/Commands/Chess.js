@@ -22,7 +22,7 @@ module.exports = class extends Command {
       index.client.discordTogether
         .createTogetherCode(message.member.voice.channel.id, "chess")
         .then(async (invite) => {
-          return message.channel.send(`Note: you have to click on the link lil nerd, not the 'Play' button, in order to start the activity.\n\n${invite.code}`);
+          return message.channel.send(`Note: you have to click on the link, not the 'Play' button, in order to start the activity.\n\n${invite.code}`);
         });
     } catch (err) {
       message.channel.send(
