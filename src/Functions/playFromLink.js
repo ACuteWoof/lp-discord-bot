@@ -1,4 +1,4 @@
-const ytdl = require("ytdl-core");
+const playdl = require("play-dl");
 const {
   createAudioPlayer,
   NoSubscriberBehavior,
@@ -7,18 +7,20 @@ const {
 } = require("@discordjs/voice");
 
 module.exports = {
-  playFromLink: function (video_link, connection, idleFunction) {
+  playFromLink: async function (video_link, connection, idleFunction) {
     try {
       if (!video_link) {
         return;
       }
-      const stream = ytdl(video_link, { filter: "audioonly" });
+      const stream = await playdl.stream(video_link);
       const player = createAudioPlayer({
         behaviors: {
           noSubscriber: NoSubscriberBehavior.Pause,
         },
       });
-      const resource = createAudioResource(stream);
+      const resource = createAudioResource(stream.stream, {
+        inputType: stream.type,
+      });
 
       console.log(`Going to play ${video_link}.`);
       player.play(resource);
